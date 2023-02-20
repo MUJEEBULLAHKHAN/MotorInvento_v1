@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Add Part Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="text-center mt-5">Parts</h2>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="purchaser_name">Technician Name</label>
+          <select class="form-control" id="purchaser_name" name="purchaser_name">
+            {% for i in p1 %}
+        <option >{{ i.username }}</option>
+        {% endfor %}
+        </select>
+        </div>
+          <div class="form-group">
+            <label for="make">Make</label>
+            <select class="form-control" id="make" name="make_name">
+              {% for i in p2 %}
+          <option >{{ i.make_name }}</option>
+          {% endfor %}
+          </select>
+          </div>
+          <div class="form-group">
+            <label for="model">Model</label>
+            <select class="form-control" id="model" name = "model_name" required>
+              {% for i in p3 %}
+              <option >{{ i.model_name }}</option>
+              {% endfor %}
+              <option><button type="button" class="btn btn-primary">+ Add New</button></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="year">Year</label>
+            <select class="form-control" id="year" name = "year" required>
+              {% for i in p4 %}
+              <option >{{ i.year }}</option>
+              {% endfor %}
+              <option><button type="button" class="btn btn-primary">+ Add New</button></option>
+            </select>
+          </div>
+        <div class="form-group">
+            <label for="partname">Part Name</label>
+            <input type="text" class="form-control" id="partname" name = "partname" placeholder="Seat/Wheel/Mirror..." required>
+          </div>
+          <div class="form-group">
+            <label for="partnumber">Part Number</label>
+            <input type="text" class="form-control" id='partnumber' name = "partnumber" placeholder="Enter part number" required>
+          </div>
+          <div class="form-group">
+            <p>Is Scrap?</p>
+              <input type="radio" id="isscrap" name="isscrap" value="Yes">
+              <label for="isscrap">Yes</label><br>
+              <input type="radio" id="isscrap" name="isscrap" value="No">
+              <label for="isscrap">No</label><br>  
+          </div>
+          <div class="form-group">
+            <label for="partsellingprice">Part Selling Price</label>
+            <input type="text" class="form-control" id='partsellingprice' name = "partsellingprice" required>
+          </div>
+          <div class="form-group">
+            <label for="partlocatione">Part Location</label>
+            <input type="text" class="form-control" id='partlocatione' name = "partlocatione" placeholder="Enter location in the form of MATRIX i.e A1,A2,A3..." required>
+          </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <script>
+      var dt = new Date();
+     document.getElementById("todaydate").value = dt;
+
+    var dt = new Date();
+    document.getElementById('date-time').innerHTML=dt;
+
+      // task.js
+  const form = document.querySelector('#task-form');
+  
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    try {
+      const response = await fetch('/web/addpart/', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+      if (data.success) {
+        alert('Part Details has been created successfully!');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  });
+  
+  </script>
+  </body>
+</html>
