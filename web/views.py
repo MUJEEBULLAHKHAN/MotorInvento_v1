@@ -14,7 +14,7 @@ def registerview(request):
         member.save()
         return redirect('/web/dashboard/')
     else:
-        return render(request, 'web/index.html')
+        return render(request, 'web/1register.html')
 
 def loginview(request):
     # if request.method == 'POST':
